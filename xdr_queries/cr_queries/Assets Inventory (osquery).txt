@@ -1,0 +1,34 @@
+-- Assets Inventory --
+
+SELECT
+/*User section*/
+   logged_in_users.user 'Usuario',
+--   source,
+/*System Info*/
+   system_info.hardware_vendor 'Fabricante',
+   system_info.hardware_model 'Modelo',
+   system_info.hardware_serial 'S/N',
+   system_info.cpu_brand 'Procesador',
+   (system_info.physical_memory / 1048576000) 'Memoria RAM (GB)',
+/*OS info*/
+   os_version.name 'Sistema Operativo',
+   os_version.build 'Version del Sistema Operativo',
+   case WHEN os_version.build = 19043 THEN '21H1'
+        WHEN os_version.build = 19042 THEN '20H2'
+        WHEN os_version.build = 19041 THEN '2004'
+        WHEN os_version.build = 18363 THEN '1909'
+        WHEN os_version.build = 18362 THEN '1903'
+        WHEN os_version.build = 17763 THEN '1809'
+        WHEN os_version.build = 17134 THEN '1803'
+        WHEN os_version.build = 16299 THEN '1709'
+        WHEN os_version.build = 15069 THEN '1703'
+        WHEN os_version.build = 14393 THEN '1607'
+        WHEN os_version.build = 10586 THEN '1511'
+        WHEN os_version.build = 10240 THEN '1507'
+   END AS Win_version
+FROM system_info
+JOIN os_version
+JOIN logged_in_users
+
+---------------------------------------------------
+

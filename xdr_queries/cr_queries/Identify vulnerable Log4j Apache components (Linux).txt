@@ -1,0 +1,11 @@
+Identify vulnerable Log4j Apache components
+
+This query helps customers identify vulnerable Log4J components in their environment. It shows Log4J installed by package managers. If you identify the vulnerable component you should update immediately and review your logs for any sign of malicious exploitation.
+
+select name, version,
+regex_match(version,"(\d+)",1) as first,
+regex_match(version,"\d+.(\d+)",1) as second,
+regex_match(version,"\d+.\d+.(\d+)",1) as third,
+regex_match(version,"\d+.\d+.\d+p(\d+)",1) as fourth from deb_packages where name LIKE 'log4j' UNION ALL select name, version,
+regex_match(version,"(\d+)",1) as first,
+regex_match(version,"\d+.(\d+)",1) as second, regex_match(version,"\d+.\d+.(\d+)",1) as third, regex_match(version,"\d+.\d+.\d+p(\d+)",1) as fourth from rpm_packages where name LIKE 'log4j';

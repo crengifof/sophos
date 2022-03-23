@@ -1,0 +1,33 @@
+
+-- Living off the land --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+-- sin variable del tiempo --
+
+SELECT spj.processname Proceso, u.username Username,  spj.cmdline Command_line, spj.sophosPID Sophos_PID
+FROM sophos_process_journal spj
+   JOIN users u ON u.uuid = spj.sid
+WHERE spj.eventtype = 0
+   AND spj.processname IN ('arp.exe', 'hostname.exe', 'ntdutil.exe', 'schtasks.exe', 'at.exe', 'ipconfig.exe', 'pathping.exe', 'systeminfo.exe', 'bitsadmin.exe', 'nbtstat.exe', 'ping.exe', 'tasklist.exe', 'certutil.exe', 'net.exe', 'powershell.exe', 'tracert.exe', 'cmd.exe', 'net1.exe', 'qprocess.exe', 'ver.exe', 'dsget.exe', 'netdom.exe', 'query.exe', 'vssadmin.exe', 'dsquery.exe', 'netsh.exe', 'qwinsta.exe', 'wevtutil.exe', 'find.exe', 'netstat.exe', 'reg.exe', 'whoami.exe', 'findstr.exe', 'nltest.exe', 'rundll32.exe', 'wmic.exe', 'fsutil.exe', 'nslookup.exe', 'sc.exe', 'wusa.exe', 'procdump.exe', 'lsass.exe', 'conhost.exe', 'setup.exe', 'sophossetup.exe', 'explorer.exe')
+
+
+
+
+-- con variable del tiempo --
+
+SELECT spj.processname Proceso, u.username Username,  spj.cmdline Command_line, spj.sophosPID Sophos_PID
+FROM sophos_process_journal spj
+   JOIN users u ON u.uuid = spj.sid
+WHERE spj.eventtype = 0 AND spj.time > strftime('%s','now','-7 days') 
+   AND spj.processname IN ('arp.exe', 'hostname.exe', 'ntdutil.exe', 'schtasks.exe', 'at.exe', 'ipconfig.exe', 'pathping.exe', 'systeminfo.exe', 'bitsadmin.exe', 'nbtstat.exe', 'ping.exe', 'tasklist.exe', 'certutil.exe', 'net.exe', 'powershell.exe', 'tracert.exe', 'cmd.exe', 'net1.exe', 'qprocess.exe', 'ver.exe', 'dsget.exe', 'netdom.exe', 'query.exe', 'vssadmin.exe', 'dsquery.exe', 'netsh.exe', 'qwinsta.exe', 'wevtutil.exe', 'find.exe', 'netstat.exe', 'reg.exe', 'whoami.exe', 'findstr.exe', 'nltest.exe', 'rundll32.exe', 'wmic.exe', 'fsutil.exe', 'nslookup.exe', 'sc.exe', 'wusa.exe', 'procdump.exe', 'lsass.exe', 'conhost.exe', 'setup.exe', 'sophossetup.exe', 'explorer.exe')
+
+
+
+user32.dll
+hmpalert.dll
+cmd.exe-0bd30981.pf
+
+
+
+

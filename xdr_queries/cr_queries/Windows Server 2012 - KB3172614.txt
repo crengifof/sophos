@@ -1,0 +1,11 @@
+
+-- KB3172614 "Windows Server 2012" Connection error WinHttpSendRequest failed 12029 --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+SELECT 
+    hotfix_id,
+    description,
+    installed_by,
+    installed_on 
+FROM patches
+WHERE hotfix_id="KB3172614"

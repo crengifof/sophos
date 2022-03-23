@@ -1,0 +1,18 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+-- Verificar Tamper Protection Apagado (0) --
+
+SELECT 
+name,
+type,
+data,
+path
+FROM
+REGISTRY
+WHERE key='HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Sophos Endpoint Defense\TamperProtection\Config'
+AND name='SEDEnabled' 
+AND data=0

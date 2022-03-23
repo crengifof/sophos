@@ -1,0 +1,63 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+SELECT 
+   meta_hostname AS Hostname, 
+   meta_username AS Username, 
+   meta_ip_address AS IP_LAN,
+   meta_os_name AS OS, 
+   name, 
+   publisher, 
+   version,
+   identifying_number,
+   install_source
+FROM xdr_data
+WHERE query_name = 'windows_programs' and name like 'ESET%%'
+--WHERE query_name = 'windows_programs' and publisher = 'ESET, spol. s r.o.'
+
+-------
+
+SELECT 
+ p.name, 
+ p.version, 
+ p.install_location, 
+ p.install_source, 
+ p.publisher,
+ p.uninstall_string,
+ p.install_date,
+ p.identifying_number 
+FROM programs AS p 
+WHERE (p.name like '%%Eset%%')
+
+
+--------------
+
+
+SELECT
+   name,
+   user_account,
+   display_name,
+   start_type,
+   status,
+   path
+FROM services
+WHERE name like ' Ekrn'
+
+--------------
+
+
+SELECT
+   name,
+   user_account,
+   display_name,
+   start_type,
+   status,
+   path
+FROM services
+WHERE name like 'EraAgentSvc'
+
+
+------------

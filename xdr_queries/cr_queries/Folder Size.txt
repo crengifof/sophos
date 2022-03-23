@@ -1,0 +1,13 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+-- Folder Size --
+-- Create $$directory$$ as File Path
+
+SELECT directory, SUM(CAST(ROUND((size * 10e-7),4) AS varchar)) AS SizeInMB FROM file WHERE directory = '$$directory$$'
+
+
+-------

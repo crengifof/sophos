@@ -1,0 +1,11 @@
+
+-- Omniinet - Data Protector --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+SELECT DISTINCT
+sfp.pathname,
+sfp.sha256
+FROM
+    sophos_file_properties sfp
+WHERE
+    sfp.pathname = 'C:\Program Files\OmniBack\bin\OmniInet.exe'

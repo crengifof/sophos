@@ -1,0 +1,20 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/f/recommended-reads/130426/xdr-academy-2021-sample-queries-and-scripts --
+-- Data Lake Query - Installed Sophos components with version number --
+
+SELECT meta_hostname AS ep_name, 
+MAX(CASE WHEN name = 'Sophos Anti-Virus' THEN version END) AS SophosAV, 
+MAX(CASE WHEN name = 'Sophos ML Engine' THEN version END) AS SophosML, 
+MAX(CASE WHEN name = 'Sophos AutoUpdate XG' THEN version END) AS SophosUpd, 
+MAX(CASE WHEN name = 'Sophos Management Communications System' THEN version END) AS SophosMgmt, 
+MAX(CASE WHEN name = 'Sophos Clean' THEN version END) AS SophosClean, 
+MAX(CASE WHEN name = 'Sophos Live Query' THEN version END) AS SophosLiveQ, 
+MAX(CASE WHEN name = 'Sophos Live Terminal' THEN version END) AS SophosLiveTerminal, 
+MAX(CASE WHEN name = 'Sophos Network Threat Protection' THEN version END) AS SophosNTP, 
+MAX(CASE WHEN name = 'Sophos Exploit Prevention' THEN version END) AS SophosExploit 
+FROM xdr_data 
+WHERE query_name = 'windows_programs'
+GROUP BY meta_hostname
+
+---------------------------------------------------
+

@@ -1,0 +1,24 @@
+SELECT
+    type,
+    name,
+    state,
+    state_timestamp,
+    remediation_path,
+    signatures_up_to_date
+FROM windows_security_products
+
+--------------
+
+
+SELECT
+    type,
+    name,
+    state,
+    state_timestamp,
+    remediation_path,
+    signatures_up_to_date
+FROM windows_security_products
+WHERE (type='Antivirus' or type='Antispyware')
+and (name!='Sophos Anti-Virus' and name!='Antivirus de Windows Defender' and name!='Antivirus de Microsoft Defender')
+
+---------------

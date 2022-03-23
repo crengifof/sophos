@@ -1,0 +1,24 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+
+SELECT
+title, support_url, msrc_severity, installed, mandatory, size, hotfix_id
+FROM
+xdr_data
+WHERE
+query_name = 'pending_windows_updates_patch'
+
+
+SELECT
+hotfix_id, caption, description, installed_by, installed_on
+FROM
+xdr_data
+WHERE
+query_name = 'windows_updates_patch'
+
+
+

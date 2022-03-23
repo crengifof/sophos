@@ -1,0 +1,78 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+-- https://community.sophos.com/intercept-x-endpoint/f/recommended-reads/130426/xdr-academy-2021-sample-queries-and-scripts --
+
+-- https://community.sophos.com/intercept-x-endpoint/edr-data-lake-eap/b/announcements/posts/technical-training-on-xdr-data-lake-with-queries-used --
+
+------
+
+
+SELECT 
+ s.user_account, 
+ s.display_name, 
+ s.name, 
+ s.status, 
+ s.start_type, 
+ s.path,
+ s.description 
+FROM services AS s 
+WHERE (s.display_name like '%%Sophos%%' or s.display_name like '%%HitmanPro%%')
+
+
+--------
+
+SELECT 
+ s.display_name, 
+ s.name, 
+ s.status, 
+ s.start_type, 
+ s.path,
+ s.user_account,
+ s.description 
+FROM services AS s 
+WHERE (s.display_name like '%%Sophos%%' or s.display_name like '%%HitmanPro%%') and s.status <> 'RUNNING'
+
+---------
+
+select r.Name as 'Service',
+case data
+when 0 then 'Running'
+when 1 then 'Stopped'
+when 2 then 'Missing'
+else 'unknown'
+end as 'ServiceState From Health'
+from registry as r
+where r.key like 'HKEY_LOCAL_MACHINE\SOFTWARE\%\Sophos\Health\Status' 
+and r.path like '%service.%'
+
+
+-----------
+
+select r.Name as 'Service',
+case data
+when 0 then 'Running'
+when 1 then 'Stopped'
+when 2 then 'Missing'
+else 'unknown'
+end as 'ServiceState From Health'
+from registry as r
+where r.key like 'HKEY_LOCAL_MACHINE\SOFTWARE\%\Sophos\Health\Status' 
+and r.path like '%service.%'
+and r.data <> 0
+
+
+-----------
+
+SELECT 
+ s.display_name, 
+ s.name, 
+ s.status, 
+ s.start_type, 
+ s.path,
+ s.user_account,
+ s.description 
+FROM services AS s 
+WHERE (s.status = 'MISSING' OR s.status = 'RUNNING') AND (s.display_name like 'Sophos%' or s.display_name like 'HitmanPro%')
+--WHERE (s.status = 'MISSING' OR s.status != 'RUNNING') AND (s.display_name like 'Sophos%' or s.display_name like 'HitmanPro%')
+
+-----

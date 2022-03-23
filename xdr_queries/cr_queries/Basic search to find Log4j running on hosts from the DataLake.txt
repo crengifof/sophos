@@ -1,0 +1,15 @@
+Basic search to find Log4j running on hosts from the DataLake
+
+Basic search which lists processes that include log4j in the cmdline> on Windows, Mac and Linux. The query returns a lot of results but works for an insight into what's running on the estate.
+
+SELECT
+meta_hostname AS ep_name,
+name,
+cmdline,
+path,
+query_name,
+sophos_pid,
+pid
+FROM xdr_data
+WHERE query_name IN( 'running_processes_linux_events', 'running_processes_osx_events', 'running_processes_windows_sophos')
+AND LOWER(cmdline) LIKE '%log4j%'

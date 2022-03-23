@@ -1,0 +1,29 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+
+-- Startup Folders --
+
+SELECT
+
+f.path,
+p.mlScore,
+p.puaScore,
+p.localRep,
+p.globalRep,
+p.localRepData,
+p.sha256 as sha256
+
+FROM file AS f
+JOIN sophos_file_properties p ON p.pathname=f.path
+WHERE
+
+( path LIKE 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\%' OR
+path LIKE 'C:\Users\%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\%' ) AND NOT ( path LIKE "%desktop.ini" );
+
+
+-------
+

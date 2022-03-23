@@ -1,0 +1,5 @@
+172.30.2.106
+SRV-WEBPAGOS
+
+1. Detectar servidores que tienen habilitado el puerto RDP
+2. Detectar servidores que tienen expuesto el puerto RDP hacia Internet

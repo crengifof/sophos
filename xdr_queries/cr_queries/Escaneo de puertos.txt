@@ -1,0 +1,17 @@
+SELECT 
+    spp.sophospid, 
+    u.username,
+    spp.pathname, 
+    etc_p.alias AS protocol,
+    lp.address,
+    lp.port
+FROM listening_ports lp
+LEFT JOIN sophos_process_properties spp
+    ON spp.pid = lp.pid
+LEFT JOIN processes p 
+    ON p.pid = spp.pid
+LEFT JOIN users u 
+    ON u.uid = p.uid
+LEFT JOIN etc_protocols etc_p
+    ON lp.protocol = etc_p.number
+GROUP BY lp.port

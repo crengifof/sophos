@@ -1,0 +1,79 @@
+
+-- https://www.catalog.update.microsoft.com/Search.aspx?q=KB4012212 --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+------------
+
+/*  Requires variable type string: kbnum */
+/* using trino function to_unixtime() searching systems with ingestion timestamp within 30 days, 30 is hard coded into time filter */
+
+select DISTINCT meta_hostname
+from
+xdr_data
+where
+meta_os_platform = 'windows'
+AND
+meta_hostname NOT IN (select meta_hostname from xdr_data where query_name = 'windows_updates_patch' AND meta_os_platform = 'windows' AND hotfix_id = '$$kbnum$$')
+AND
+to_unixtime(ingestion_timestamp) > to_unixtime(date_add('day', - 30, now()))
+
+
+
+------------
+
+SELECT 
+    hotfix_id,
+    description,
+    installed_by,
+    installed_on 
+FROM patches
+WHERE (hotfix_id LIKE "KB4012212") or (hotfix_id LIKE "KB4012215") or (hotfix_id LIKE "KB4015549")
+ or (hotfix_id LIKE "KB4012606") or (hotfix_id LIKE "KB4016637") or (hotfix_id LIKE "KB4013198") or (hotfix_id LIKE "KB4016636") 
+ or (hotfix_id LIKE "KB4013429") or (hotfix_id LIKE "KB4016635")  
+--WHERE hotfix_id!="KB4012212"
+--wmic qfe get hotfixid | find "KB4012212" 
+--& wmic qfe get hotfixid | find "KB4012215" 
+--& wmic qfe get hotfixid | find "KB4015549"
+
+------------
+
+
+SELECT
+hotfix_id,
+caption,
+description
+FROM patches
+WHERE hotfix_id<>"KB4012212"
+
+
+---------
+
+SELECT 
+    hotfix_id,
+    description,
+    installed_by,
+    installed_on 
+FROM patches
+WHERE hotfix_id<>"KB4012212"
+
+------
+
+/*  Requires variable type string: kbnum */
+/* using trino function to_unixtime() searching systems with ingestion timestamp within 30 days, 30 is hard coded into time filter */
+
+select DISTINCT meta_hostname
+--hotfix_id
+from
+xdr_data
+where
+meta_os_platform = 'windows'
+AND
+meta_hostname NOT IN (select meta_hostname from xdr_data where query_name = 'windows_updates_patch' 
+AND meta_os_platform = 'windows' AND hotfix_id = '$$kbnum$$')
+--AND to_unixtime(ingestion_timestamp) > to_unixtime(date_add('day', - 30, now()))
+
+---------
+
+
+
+

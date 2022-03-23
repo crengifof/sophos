@@ -1,0 +1,10 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+SELECT *
+FROM SCHEDULED_TASKS
+WHERE name LIKE 'BrowserUpdate%%'
+

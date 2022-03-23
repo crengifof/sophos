@@ -1,0 +1,18 @@
+
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+SSELECT
+    meta_hostname AS ep_name,
+    eventid,
+    subject_username,
+    subject_domain,
+    task_name,
+    task_content,
+    description,
+    provider_name,
+    source
+FROM xdr_data
+WHERE query_name = 'windows_event_scheduled_task_created'
+
+

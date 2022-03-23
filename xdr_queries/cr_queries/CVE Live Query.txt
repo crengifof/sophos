@@ -1,0 +1,32 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+-- Variables $$Unmanaged App$$ as STRING
+
+WITH program_list AS ( 
+   SELECT
+      publisher,
+      REPLACE(REPLACE(REPLACE(name,',',' '),'+',' '),'.',' ') name,
+      version
+   FROM programs 
+   WHERE name LIKE '%$$Unmanaged App$$%'
+      )
+
+SELECT 
+   publisher, 
+   CAST(name AS TEXT) Application,
+   version,
+   json_extract(curl.result,'$.result.CVE_Items[0].cve.CVE_data_meta.ID') CVE_ID,
+   url 'NIST Vuln Info'
+   
+FROM program_list 
+   JOIN curl ON 
+      url = 'https://services.nvd.nist.gov/rest/json/cves/1.0?keyword=' 
+         || replace(program_list.name, ltrim(program_list.name, replace(program_list.name, ' ', '')), '') 
+         || '+' 
+         || program_list.version
+
+-------

@@ -1,0 +1,21 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+SELECT
+description “Desc”,
+mac “MAC”
+FROM interface_details
+WHERE MAC >1;
+/* This removes the loopback adapters and Microsoft tunnels */
+
+-------
+
+select
+json_extract(curl.result,'$.result.company') device,
+*
+from arp_cache left join curl on url = 'http:' || '/' || '/' || 'macvendors.co/api/' || arp_cache.mac where mac not in ('FF:FF:FF:FF:FF:FF') AND permanent = '0'
+
+-------

@@ -1,0 +1,66 @@
+
+
+Cyber Kill Chain
+https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html
+
+Cobalt Strike
+https://www.cobaltstrike.com/
+
+MITRE ATT&CK
+https://attack.mitre.org/
+
+Sophos News - todo lo relacionado a Conti Ransomware
+https://news.sophos.com/en-us/tag/conti/
+
+Sophos News - todo lo relacionado a Microsoft Exchange Server
+https://news.sophos.com/en-us/tag/exchange-server/
+
+Ransomware Conti
+https://github.com/sophoslabs/IoCs/blob/master/Ransomware-Conti.csv
+
+
+MITRE ATT&CK - Tactics - Reconnaissance
+https://attack.mitre.org/tactics/TA0043/
+
+MITRE ATT&CK - Techniques - Phishing
+https://attack.mitre.org/techniques/T1566/
+
+Shodan
+https://www.shodan.io/dashboard
+
+Social Engineer Toolkit (SET)
+https://www.trustedsec.com/tools/the-social-engineer-toolkit-set/
+
+Proyecto LOLBAS
+https://lolbas-project.github.io/
+
+Proyecto GTFOBins
+https://gtfobins.github.io/
+
+Sophos IOCs
+https://github.com/sophoslabs/IoCs
+
+ScDbg
+http://sandsprite.com/blogs/index.php?uid=7&pid=152
+
+CyberChef
+https://gchq.github.io/CyberChef/
+
+
+Sophos Schema Data Lake
+https://docs.sophos.com/central/References/schemas/index.html
+
+
+Decoding Malicious PowerShell Activity - A Case Study
+https://community.sophos.com/sophos-labs/b/blog/posts/decoding-malicious-powershell
+
+
+CVE-2013-2347 - Vulnerabilidad de HP Data Protector
+https://attackerkb.com/topics/hHnqklkaSm/cve-2013-2347#vuln-details
+
+
+Curso ET09 - Sophos XDR v5 en https://sophos.netexam.com o a través del partner portal
+
+
+Curso ET07 - Sophos Central API v1.0 en https://sophos.netexam.com o a través del partner portal
+

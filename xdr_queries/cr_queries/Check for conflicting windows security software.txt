@@ -1,0 +1,34 @@
+
+------------------------
+
+-- This query will show you all other products besides Sophos AV, Windows Firewall, and Defender (only if disabled) - if Defender is 'On', it will still show up (even though this technically shouldn't happen)--
+
+SELECT
+    type,
+    name,
+    state,
+    state_timestamp,
+    remediation_path,
+    signatures_up_to_date
+FROM windows_security_products
+WHERE name NOT LIKE '%Sophos%' AND name <> "Windows Firewall" AND (name NOT LIKE '%Defender%' AND state = 'Off')
+
+
+-----------------------
+
+-- Another way to go would be to ensure Sophos AV is in an 'On' state and only exclude products that are in an 'Off' state --
+
+
+SELECT
+    type,
+    name,
+    state,
+    state_timestamp,
+    remediation_path,
+    signatures_up_to_date
+FROM windows_security_products
+WHERE name <> "Windows Firewall" AND state = 'On'
+
+
+------------------------
+

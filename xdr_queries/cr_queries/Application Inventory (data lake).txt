@@ -1,0 +1,106 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+-- Programs --
+
+SELECT 
+   -- Device ID DETAILS
+   meta_hostname AS Hostname, 
+   meta_username AS Username, 
+   meta_ip_address AS IP_LAN, 
+   meta_public_ip AS IP_WAN, 
+   meta_os_name AS OS, 
+   name, 
+   publisher, 
+   version,
+   identifying_number
+   
+FROM xdr_data
+WHERE query_name = 'windows_programs'
+
+------
+
+-- Program - Google Chrome --
+
+SELECT meta_hostname AS Endpoint,
+MAX(CASE WHEN name = 'Google Chrome' THEN version END) AS Chrome
+FROM xdr_data
+WHERE query_name = 'windows_programs'
+GROUP BY meta_hostname
+
+---------
+
+-- Programs --
+
+SELECT meta_hostname AS Endpoint,  
+MAX(CASE WHEN name = 'Zoom' THEN version END) AS Zoom, 
+MAX(CASE WHEN name LIKE 'Mozilla Firefox%' THEN version END) AS Firefox, 
+MAX(CASE WHEN name = 'Microsoft OneDrive' THEN version END) AS OneDrive, 
+MAX(CASE WHEN name = 'Google Chrome' THEN version END) AS Chrome, 
+MAX(CASE WHEN name = 'Microsoft Edge' THEN version END) AS Edge, 
+MAX(CASE WHEN name = 'Adobe Acrobat Reader DC' THEN version END) AS AdobeReader 
+FROM xdr_data 
+WHERE query_name = 'windows_programs'
+GROUP BY meta_hostname
+
+---------
+
+
+-- Software list temp table
+WITH software_temp AS (
+SELECT DISTINCT
+name,
+MAX(version) AS version,
+meta_hostname
+FROM xdr_data
+WHERE query_name = 'windows_programs'
+Group BY
+name, meta_hostname
+)
+select
+name AS Software_Title,
+version, 
+COUNT(version) AS Total_Installs
+from software_temp
+--Add software name below for testing
+--WHERE name LIKE '%DC%'
+GROUP BY
+name, version
+ORDER BY
+name
+
+
+
+---------
+
+
+-- Software list temp table
+WITH software_temp AS (
+SELECT DISTINCT
+name,
+MAX(version) AS version,
+meta_hostname
+FROM xdr_data
+WHERE query_name = 'windows_programs'
+Group BY
+name, meta_hostname
+)
+select
+--meta_hostname,
+name AS Software_Title,
+version, 
+COUNT(version) AS Total_Installs
+from software_temp
+--Add software name below for testing
+WHERE (name LIKE '%HP Data Protector%' or name LIKE '%HPE Intelligent Management%')
+GROUP BY
+name, version
+ORDER BY
+name
+
+------
+
+

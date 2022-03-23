@@ -1,0 +1,29 @@
+
+-- RDP Live connections --
+
+SELECT
+    spp.sophospid,
+    u.username,
+    spp.pathname,
+    CASE lp.protocol
+      WHEN 6 THEN "TCP"
+      WHEN 17 THEN "UDP"
+      ELSE lp.protocol
+    END protocol,
+    lp.address,
+    lp.port,
+    spp.localrep,
+    spp.globalrep,
+    spp.puaScore,
+    spp.mlscore,
+    spp.sha256
+FROM listening_ports lp
+LEFT JOIN sophos_process_properties spp
+    ON spp.pid = lp.pid
+LEFT JOIN processes p
+    ON p.pid = spp.pid
+LEFT JOIN users u
+    ON u.uid = p.uid
+WHERE lp.port = 3389
+
+-----------------------------

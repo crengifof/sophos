@@ -1,0 +1,28 @@
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+------
+
+SELECT
+ ingestion_timestamp,
+ username,
+ meta_hostname,
+ meta_ip_address,
+ meta_public_ip,
+ meta_os_name,
+ cmdline,
+ pid,
+ name,
+ path,
+ sophos_pid,
+ parent,
+ parent_name,
+ parent_path,
+ parent_sophos_pid
+FROM
+  xdr_data
+WHERE
+  query_name = 'running_processes_windows_sophos'
+  AND (name = 'powershell.exe'
+  OR name = 'cmd.exe')

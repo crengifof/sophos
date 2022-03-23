@@ -1,0 +1,12 @@
+
+-- Solarwinds --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+SELECT
+name,
+version,
+install_location,
+publisher,
+uninstall_string,
+install_date
+FROM programs where name like 'SolarWinds Orion%2020.2' or name like 'SolarWinds Orion%2020.2.1%' or name like 'SolarWinds Orion%2019.4%';

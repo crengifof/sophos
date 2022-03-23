@@ -1,0 +1,57 @@
+
+-- Files with specific extension or filename --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+SELECT
+  path,
+  directory,
+  filename,
+  device,
+  size
+FROM file
+WHERE directory LIKE 'C:\users\%\desktop%%'
+ AND filename LIKE '%%.exe'
+ OR filename LIKE '%%.txt'
+
+
+--------------------
+
+SELECT
+  path,
+  directory,
+  filename,
+  device,
+  size
+FROM file
+WHERE directory LIKE 'C:\Windows\' AND filename LIKE '%%.exe'
+
+
+----------------------
+
+
+SELECT
+  path,
+  directory,
+  filename,
+  device,
+  size
+FROM file
+WHERE filename LIKE 'C:\Windows\%%.exe'
+
+
+---------------------
+
+
+SELECT
+  path,
+  directory,
+  filename,
+  device,
+  size
+FROM file
+WHERE filename LIKE '%%.exe' OR filename LIKE '%%.txt'
+
+
+
+---------------------

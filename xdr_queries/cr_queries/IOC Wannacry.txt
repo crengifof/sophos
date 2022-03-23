@@ -1,0 +1,128 @@
+
+-- Files with specific extension or filename --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+SELECT
+  f.path,
+  f.directory,
+  f.filename,
+  sfp.sha256,
+  f.size
+FROM file f
+LEFT JOIN sophos_file_properties sfp
+ON f.path = sfp.path
+WHERE 
+(f.directory LIKE 'C:\Windows\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+OR 
+(f.directory LIKE 'C:\Windows\System32\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+OR 
+(f.directory LIKE 'C:\ProgramData\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+OR 
+(f.directory LIKE 'C:\Program Files\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+OR 
+(f.directory LIKE 'C:\Program Files (x86)\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+
+OR 
+(f.directory LIKE 'C:\Users\%\Desktop\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+OR 
+(f.directory LIKE 'C:\Users\%\AppData\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+
+OR 
+(f.directory LIKE 'C:\Users\%\AppData\Roaming\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+
+OR 
+(f.directory LIKE 'C:\Users\%\AppData\Local\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))
+
+
+
+OR 
+(f.directory LIKE 'C:\Users\%\AppData\Local\Temp\' 
+AND (f.filename LIKE 'tasksche.exe' 
+OR f.filename LIKE 'mssecsvr.exe' 
+OR f.filename LIKE 'qeriuwjhrf' 
+OR f.filename LIKE 'taskse.exe' 
+OR f.filename LIKE 'taskdl.exe' 
+OR f.filename LIKE '%%.lnk' 
+OR f.filename LIKE '%%.vbs' 
+OR f.filename LIKE '%%.wnry'))

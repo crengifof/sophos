@@ -1,0 +1,52 @@
+
+-- Scheduled Tasks (osquery) --
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+WITH scheduled_task_details AS (
+    SELECT
+        (next_run_time - STRFTIME('%s', 'now')) AS secs_till_next_run,
+        name,
+        action,
+        path,
+        enabled,
+        state,
+        hidden,
+        last_run_time,
+        next_run_time,
+        last_run_message,
+        last_run_code
+    FROM
+        scheduled_tasks
+)
+
+SELECT
+    name,
+    path,
+    action,
+    state,
+    CAST(
+        CASE
+            WHEN last_run_time = 943920000 THEN ''
+            ELSE STRFTIME('%Y-%m-%dT%H:%M:%SZ', DATETIME(last_run_time, 'unixepoch'))
+        END AS TEXT
+    ) AS last_run_time,
+    CAST(
+        CASE
+            WHEN secs_till_next_run < 0 THEN ''
+            ELSE STRFTIME('%Y-%m-%dT%H:%M:%SZ', DATETIME(next_run_time, 'unixepoch'))
+        END AS TEXT
+    ) AS next_run_time,
+    CAST(
+        CASE
+            WHEN secs_till_next_run < 0 THEN ''
+            ELSE
+                (secs_till_next_run / 60 / 60 / 24) || ' days ' ||
+                (secs_till_next_run / 60 / 60 % 24) || ' hours ' ||
+                (secs_till_next_run / 60 % 60) || ' mins ' ||
+                (secs_till_next_run % 60) || ' secs'
+        END AS TEXT
+    ) AS time_till_next_run,
+    last_run_message
+FROM scheduled_task_details
+WHERE enabled = 1
+

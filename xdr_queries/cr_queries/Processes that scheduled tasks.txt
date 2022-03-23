@@ -1,0 +1,27 @@
+
+
+-- https://community.sophos.com/intercept-x-endpoint/p/query-forum --
+
+
+SELECT
+    STRFTIME('%Y-%m-%dT%H:%M:%SZ', DATETIME(windows_events.time, 'unixepoch')) AS date_time,
+    process_journal.parentSophosPID AS parent_sophos_pid,
+    parent_process_journal.pathname AS parent_path_name,
+    process_journal.processName AS process_name,
+    process_journal.sophosPID AS sophos_pid,
+    windows_events.executing_pid AS executing_pid,
+    process_journal.pathname AS path,
+    process_journal.cmdline AS cmd_line,
+    windows_events.data
+FROM sophos_windows_events AS windows_events
+LEFT JOIN sophos_process_journal AS process_journal ON
+    process_journal.time >= windows_events.time - 5
+    AND process_journal.time <= windows_events.time + 5
+    AND process_journal.cmdline LIKE '%schtasks%/Create%'
+    AND process_journal.eventType = 0
+LEFT JOIN sophos_process_journal AS parent_process_journal ON
+    process_journal.parentSophosPID = parent_process_journal.sophosPID
+WHERE
+    windows_events.eventId = 4698
+    AND windows_events.time > $$start_time$$
+    AND windows_events.time < $$end_time$$
